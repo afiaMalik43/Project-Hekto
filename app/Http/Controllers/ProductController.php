@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
     /**
@@ -16,8 +17,16 @@ class ProductController extends Controller
     {
         $products = Product::latest()->paginate(5);
 
-        return view('admin.index', compact('products'))
+        return view('admin.products.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
+    public function grid()
+    {
+        $products = Product::where('is_deleted','0')->paginate(20);
+
+        return view('shop_grid', compact('products'))
+            ->with('i', (request()->input('page', 1) - 1) * 20);
     }
 
     /**
@@ -28,7 +37,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('admin.addProduct');
+        return view('admin.products.addProduct');
     }
 
     /**
@@ -44,6 +53,7 @@ class ProductController extends Controller
             'name' => 'required',
             'detail' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'price' => 'required',
         ]);
 
         $input = $request->all();
@@ -70,7 +80,13 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
-        return view('admin.show', compact('product'));
+        return view('admin.products.show', compact('product'));
+    }
+
+    public function detail(Product $product)
+    {
+        //
+        return view('product_detail', compact('product'));
     }
 
     /**
@@ -82,7 +98,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
-        return view('admin.edit', compact('product'));
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
@@ -103,6 +119,11 @@ class ProductController extends Controller
         $input = $request->all();
 
         if ($image = $request->file('image')) {
+            if(File::exists(public_path('images/'.$product->image))){
+                File::delete(public_path('images/'.$product->image));
+            }else{
+                dd('File does not exists.');
+            }
             $destinationPath = 'images/';
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
@@ -123,12 +144,16 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
-    {
-        //
-        $product->delete();
 
+    public function delete(Product $product)
+    {
+        //$product->delete();
+        
+        DB::table('products')
+        ->where('id', $product->id)  // find your user by their email
+        ->limit(1)  // optional - to ensure only one record is updated.
+        ->update(array('is_deleted' => '1'));  // update the record in the DB.
         return redirect()->route('products.index')
-            ->with('success', 'Product deleted successfully');
+            ->with('success', "Product deleted successfully");
     }
 }

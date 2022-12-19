@@ -90,13 +90,13 @@ color: #000000;
 	font-family: 'Lato';
 	font-size: 18px;
 	line-height: 22px;
-	/* identical to box height */
-
-
-	/* pink */
-
+	text-decoration: none;
 	color: #FB2E86;
 
+}
+.feature-card-body .name hover{
+	text-decoration: none;
+	color: #1A0B5B;
 }
 .feature-card-body .code{
 font-size: 14px;
@@ -133,10 +133,12 @@ color: #151875;
 }
 .latest-card-body .name{
 font-size: 16px;
-
-/* Text */
-
+text-decoration: none;
 color: #151875;
+}
+.latest-card-body .name hover{
+	text-decoration: none;
+	color: #FB2E86;
 }
 .n-price{
 font-size: 14px;

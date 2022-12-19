@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('detail');
             $table->string('image');
-            $table->string('price');
-            $table->string('discount-price')->nullable(true);
+            $table->integer('price');
+            $table->integer('discount-price')->nullable(true);
+            $table->tinyInteger('is_deleted')->default('0');
             $table->string('rating')->nullable(true);
             $table->timestamps();
         });

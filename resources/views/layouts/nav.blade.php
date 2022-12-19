@@ -21,7 +21,7 @@
 				        <a class="nav-link" href="#">Pages</a>
 				      </li>
 				      <li class="nav-item">
-				        <a class="nav-link" href="#">Products</a>
+				        <a class="nav-link" href="{{ route('products.grid') }}">Products</a>
 				      </li>
 				      <li class="nav-item">
 				        <a class="nav-link " href="#">Blog</a>

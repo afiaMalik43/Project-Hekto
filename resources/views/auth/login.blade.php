@@ -24,6 +24,11 @@
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
+
+            <div class="form-check">
+                <input class="form-check-input py-2 float-start" type="checkbox" value="" id="remember" checked />
+                <label class="form-check-label" for="remember">{{ __('Remember Me') }}</label>
+            </div>
             @if (Route::has('password.request'))
             <a class="float-start my-1 login-link text-decoration-none" href="{{ route('password.request') }}">
                 {{ __('Forgot Your Password?') }}
@@ -31,7 +36,7 @@
             @endif
             <button type="submit" class="cart-pink-button rounded-0 w-100 py-3 my-3">Sign In</button>
         </form>
-        <p class="login-link">Don't have an account?<a href="#" class="login-link">Create Account</a></p>
+        <p class="login-link">Don't have an account?<a href="{{route('register')}}" class="login-link">Create Account</a></p>
     </div>
 </div>
 
