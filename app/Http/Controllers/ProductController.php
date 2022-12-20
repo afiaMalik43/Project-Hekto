@@ -150,9 +150,9 @@ class ProductController extends Controller
         //$product->delete();
         
         DB::table('products')
-        ->where('id', $product->id)  // find your user by their email
-        ->limit(1)  // optional - to ensure only one record is updated.
-        ->update(array('is_deleted' => '1'));  // update the record in the DB.
+        ->where('id', $product->id)  
+        ->limit(1)  
+        ->update(array('is_deleted' => '1'));  
         return redirect()->route('products.index')
             ->with('success', "Product deleted successfully");
     }

@@ -44,18 +44,23 @@
             </div>
             </p>
             <p class="color-grey">{{ $product->detail }}</p>
-            <a class="btn btn-secondary color-primary" href="{{route('cart.store',$product->id)}}>
-                Add To Cart
-            </a>
-            &nbsp &nbsp
-            <i class="fa fa-heart-o color-primary" aria-hidden="true"></i>
-            <p class="md-hd mt-3">Categories</p>
-            <p class="md-hd">Tags</p>
-            <p class="md-hd">Share
-                <i class="fa fa-facebook-official px-1" aria-hidden="true"></i>
-                <i class="fa fa-instagram px-1" aria-hidden="true"></i>
-                <i class="fa fa-twitter-square px-1" aria-hidden="true"></i>
-            </p>
+            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                <button type="submit" class="btn btn-secondary color-primary">
+                    Add To Cart
+                </button>
+            </form>
+                &nbsp &nbsp
+                <i class="fa fa-heart-o color-primary" aria-hidden="true"></i>
+                <p class="md-hd mt-3">Categories</p>
+                <p class="md-hd">Tags</p>
+                <p class="md-hd">Share
+                    <i class="fa fa-facebook-official px-1" aria-hidden="true"></i>
+                    <i class="fa fa-instagram px-1" aria-hidden="true"></i>
+                    <i class="fa fa-twitter-square px-1" aria-hidden="true"></i>
+                </p>
         </div>
     </div>
 </div>

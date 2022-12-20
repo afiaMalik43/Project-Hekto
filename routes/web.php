@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +25,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
-
-//Route::resource('products', ProductController::class);
 Route::controller(ProductController::class)->group(function(){
 
     Route::get('products', 'index')->name('products.index');
@@ -51,23 +50,13 @@ Route::controller(ProductController::class)->group(function(){
 
 Route::controller(CartController::class)->group(function(){
 
-    Route::get('cart', 'index')->name('cart.index');
+    Route::get('cart', 'index')->name('cart');
 
     Route::post('cart', 'store')->name('cart.store');
-
-    Route::get('cart/create', 'create')->name('cart.create');
-
-    Route::get('cart/{product}', 'show')->name('cart.show');
 
     Route::put('cart/{product}', 'update')->name('cart.update');
 
     Route::delete('cart/{product}', 'destroy')->name('cart.destroy');
 
-    Route::get('cart/{product}/edit', 'edit')->name('cart.edit');
 
-    Route::post('cart/{product}/delete', 'delete')->name('cart.delete');
-
-    Route::get('cart','grid')->name('cart.grid');
-
-    Route::get('cart/{product}', 'detail')->name('cart.detail');
 });
