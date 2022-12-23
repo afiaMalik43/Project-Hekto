@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\StripePaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,9 +46,9 @@ Route::controller(ProductController::class)->group(function(){
 
     Route::post('products/{product}/delete', 'delete')->name('products.delete');
 
-    Route::get('products','grid')->name('products.grid');
+    Route::get('home/products','grid')->name('products.grid');
 
-    Route::get('products/{product}', 'detail')->name('products.detail');
+    Route::get('home/products/{product}', 'detail')->name('products.detail');
 });
 
 Route::controller(CartController::class)->group(function(){
@@ -54,9 +57,50 @@ Route::controller(CartController::class)->group(function(){
 
     Route::post('cart', 'store')->name('cart.store');
 
-    Route::put('cart/{product}', 'update')->name('cart.update');
+    Route::patch('cart/add', 'update')->name('cart.update');
 
-    Route::delete('cart/{product}', 'destroy')->name('cart.destroy');
+    Route::delete('remove-from-cart/id', 'destroy')->name('cart.destroy');
 
+    Route::delete('cart/clear', 'clear')->name('cart.clear');
+    
+    Route::get('order', 'open')->name('orders.create');
+});
 
+Route::controller(OrderController::class)->group(function(){
+
+    Route::get('orders', 'index')->name('orders.index');
+
+    Route::get('orders/complete', 'complete')->name('orders.complete');
+
+    Route::post('orders', 'store')->name('orders.store');
+
+    Route::get('orders/{order}', 'show')->name('orders.show');
+
+    Route::patch('orders/add', 'update')->name('orders.update');
+
+    Route::delete('orders', 'destroy')->name('orders.destroy');
+
+    Route::get('orders/{order}/edit', 'edit')->name('orders.edit');
+
+    Route::post('orders/{order}/delete', 'delete')->name('orders.delete');
+
+});
+
+Route::controller(UserController::class)->group(function(){
+
+    Route::get('users', 'index')->name('users.index');
+
+    Route::get('users/{user}', 'show')->name('users.show');
+
+    Route::delete('users', 'destroy')->name('users.destroy');
+
+    Route::get('users/{user}/edit', 'edit')->name('users.edit');
+
+    Route::post('users/{user}/delete', 'delete')->name('users.delete');
+
+});
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
 });

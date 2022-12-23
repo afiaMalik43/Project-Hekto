@@ -7,10 +7,12 @@
     <div id="app">
         
         @include('layouts.nav')
+        @include('layouts.partials.page_header')
 
         @yield('content')
        
         @include('layouts.partials.footer')
     </div>
+    @yield('scripts')
 </body>
 </html>

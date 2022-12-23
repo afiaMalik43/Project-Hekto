@@ -1,13 +1,6 @@
 @extends('layouts.app')
-
+@section('title', 'Shop')
 @section('content')
-<div class="bg-grey">
-    <div class="py-5 my-5 mx-5 px-5">
-        <h2 class="feature-heading">Shop Grid Default</h2>
-        <p class="lato">Home . Pages . <span class="color-pinkk">Shop Grid Default</span></p>
-    </div>
-
-</div>
 
 <!-- Trending Product Section -->
 <div class="container col-xxl-8 py-5 justify-content-lg-center ">

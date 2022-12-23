@@ -1,14 +1,7 @@
 @extends('layouts.app')
+@section('title', 'Product Detail')
 @section('content')
 
-<!-- Page Header Start -->
-<div class="bg-grey py-3">
-    <div class="mx-5 px-5">
-        <h2 class="feature-heading">Product Detail</h2>
-        <p class="lato">Home . Pages . <span class="color-pinkk">Product Detail</span></p>
-    </div>
-</div>
-<!-- Page Header End -->
 <!-- Product Overview Section -->
 
 <div class="container col-xxl-8 py-2 ">

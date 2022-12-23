@@ -23,10 +23,8 @@ class ProductController extends Controller
 
     public function grid()
     {
-        $products = Product::where('is_deleted','0')->paginate(20);
-
-        return view('shop_grid', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * 20);
+        $products = Product::Where('is_deleted','0')->paginate(15);
+        return view('shop_grid', compact('products'));
     }
 
     /**

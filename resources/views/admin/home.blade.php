@@ -15,7 +15,7 @@
             <div class="card" style="width: 18rem;">
                 <img src="../../../images/view.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
-                    <a href="#" class="btn btn-primary">Users</a>
+                    <a href="{{ route('users.index') }}" class="btn btn-primary">Users</a>
                 </div>
             </div>
         </div>

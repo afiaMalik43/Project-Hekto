@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Home')
 @section('content')
 <!-- Promotion Start -->
 <div class="col-xxl-12 px-5 hero">
